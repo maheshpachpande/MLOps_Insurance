@@ -15,3 +15,5 @@ echo "# MLOps_Insurance" >> README.md
 - git branch -M main
 - git push -u origin main
 
+# Create the .gitignore Python file and pull into conda environment
+- git pull https://github.com/maheshpachpande/MLOps_Insurance.git
