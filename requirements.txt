@@ -1,0 +1,13 @@
+numpy
+pandas
+scikit-learn
+matplotlib
+seaborn
+scipy
+python-dotenv
+mysql-connector-python
+pymysql
+dvc
+mlflow
+ipykernel
+-e .

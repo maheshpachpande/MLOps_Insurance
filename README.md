@@ -21,4 +21,10 @@ echo "# MLOps_Insurance" >> README.md
 # Create template.py for creating a Production-grade folder structure
 - echo.>template.py
 
+# Create Setup for project
+- setup.py
+- python setup.py install
+
 # 
+
+
