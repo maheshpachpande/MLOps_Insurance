@@ -28,4 +28,8 @@ echo "# MLOps_Insurance" >> README.md
 
 # Logger added
 
+# Exception added
+
+
+
 

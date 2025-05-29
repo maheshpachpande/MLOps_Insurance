@@ -7,7 +7,6 @@ scipy
 python-dotenv
 mysql-connector-python
 pymysql
-dvc
-mlflow
+statsmodels
 ipykernel
 -e .
