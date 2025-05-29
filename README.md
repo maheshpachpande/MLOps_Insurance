@@ -17,3 +17,8 @@ echo "# MLOps_Insurance" >> README.md
 
 # Create the .gitignore Python file and pull into conda environment
 - git pull https://github.com/maheshpachpande/MLOps_Insurance.git
+
+# Create template.py for creating a Production-grade folder structure
+- echo.>template.py
+
+# 
