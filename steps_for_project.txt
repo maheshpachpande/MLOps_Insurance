@@ -1,0 +1,221 @@
+Steps:
+- create virtual enviroment
+    - conda create - n venv python==3.12 -y
+    - conda activate venv
+
+- create template.py file for folder structure of project
+
+
+1. Reading the data in Python
+
+2. Defining the problem statement
+
+3. Identifying the Target variable
+- (Regression / Classification)
+
+4. Looking at the distribution of Target variable
+- (Should be Normal)
+
+5. Basic Data exploration:
+
+- Understand the Shape
+- Preview the Data
+- Column Information (Data types, nulls)
+- Summary stats (numerical columns)
+- Check for Missing Values
+- Check for Duplicates
+- Explore Categorical Features (value_counts)
+- Explore Numerical Features (Describe, Correlation matrix)
+- Check Unique Values per Column
+- Check for Constant (Single value for all) or Quasi-Constant Columns (a column with 99.5% zeros and a few ones)
+- Data Types Summary
+
+6. Rejecting useless columns:
+
+- Constant Columns  or Quasi-Constant Columns
+- High Percentage of Missing Values
+- ID / Index / Name Columns
+- Duplicate Columns
+- Drop high_cardinality_cats
+- Custom Domain Filtering
+
+7. Visual Exploratory Data Analysis:
+
+- Understand the distribution, spread, skewness, and presence of outliers for each variable using visualizations.
+- [Which numerical features are skewed, Where outliers exist, Class imbalance in categorical variables, Correlation between variables].
+- Histograms for Distribution
+- Box-plots to Detect Outliers
+- Q-Q Plots for Normality
+- Categorical Features (Bar Plots for Distribution)
+- Skewness (Numerical Insight)
+- Pairwise Relationships
+- Correlation Heat-map
+
+
+
+8. Feature Selection based on data distribution
+
+Action
+Feature Property
+Reason
+Remove constant/quasi-constant
+No variability
+Useless for learning
+Transform skewed features
+Highly skewed
+To improve model performance
+Remove high correlation
+Multicollinearity
+To avoid redundancy
+Remove high-cardinality
+Over-fitting risk / no generalization
+Too sparse for ML
+Remove low-variance categorical
+Non-informative
+Doesn’t help model
+
+
+9. Outlier treatment: (Reduced risk of model bias, Better performance on downstream tasks)
+
+Method
+Description
+When to Use
+✅ Capping (Winsorization)
+Replace outliers with nearest acceptable boundary (IQR-based)
+Retain data, control distortion
+✅ Z-score Filtering
+Remove rows with z-score > 3 in any column
+Data is normally distributed
+✅ Log/Power Transform
+Reduce skew and compress outliers (e.g., Yeo-Johnson, Box-Cox)
+Data is positively skewed or heavy-tailed
+✅ Model-Based (IsolationForest)
+Automatically detect and remove anomalies based on patterns
+When you have no clear distribution
+
+
+10. Missing Values treatment:
+
+Type
+Meaning
+MCAR (Missing Completely at Random)
+No pattern; safe to drop or impute
+MAR (Missing at Random)
+Related to observed variables (e.g., missing income depends on job)
+MNAR (Not at Random)
+Related to unobserved or hidden factors (e.g., patients hiding weight)
+
+For Numerical Features:
+Method
+When to Use
+Code
+Mean/Median
+MCAR or symmetric (mean), skewed (median)
+SimpleImputer(strategy='mean')
+KNN Imputation
+MAR, and small dataset with similar neighbors
+KNNImputer()
+Model-Based Imputation
+MAR/MNAR with clear patterns
+Use regression or classifiers
+Drop Column
+> 50% missing and not essential
+df.drop(columns=[...])
+Leave as is
+Use algorithms that handle NaN (e.g., CatBoost)
+NA
+
+For Categorical Features:
+Method
+When to Use
+Code
+Mode (most frequent)
+MCAR/MAR
+SimpleImputer(strategy='most_frequent')
+'Missing' Category
+When missing is informative
+df[col].fillna("Missing")
+Drop if useless
+Too many missing & low importance
+df.drop(columns=[...])
+
+11. Visual correlation analysis:
+    • Multicollinearity between features → reduce redundancy
+    • Positive/Negative relationships → feature engineering
+    • Clustering → similar features can be grouped or averaged
+
+12. Statistical correlation analysis (Feature Selection):
+
+Statistical Tests for Correlation (Based on Data Type):
+Feature Type
+Target Type
+Recommended Test
+Purpose
+Numerical
+Numerical
+Pearson / Spearman correlation
+Linear / monotonic relationship
+Categorical
+Categorical
+Chi-Square test
+Association strength
+Numerical
+Categorical
+ANOVA / Mutual Information
+Group mean differences
+Categorical
+Numerical
+Point Biserial / Mutual Info
+Correlation between class & num
+
+Statistical Feature Selection Methods:
+Feature → Target Type
+🧭 Purpose
+✅ Assumptions
+🧪 Best Method
+📐 Parametric?
+Numerical → Numerical
+Measure strength & direction of linear or monotonic relationship
+- Continuous variables 
+- Linear (Pearson) 
+- Normal distribution (Pearson) 
+- No outliers (Pearson)
+✅ Pearson Correlation ✅ Spearman Rank Correlation
+✔️ (Pearson) 
+❌ (Spearman)
+Numerical → Categorical (binary or multi-class)
+Test if means of numeric feature differ between categories
+- Numeric feature is normally distributed 
+- Homogeneity of variance - Independent samples
+✅ ANOVA F-test ✅ Kruskal–Wallis H-test (non-parametric)
+✔️ (ANOVA) 
+❌ (Kruskal–Wallis)
+Categorical → Categorical
+Test if categories are associated
+- Categorical data only 
+- Expected frequency ≥ 5 
+- Independent samples
+✅ Chi-Square Test ✅ Fisher’s Exact Test (2x2 only)
+✔️ (Chi-Square) 
+❌ (Fisher)
+Categorical (binary) → Numerical
+Measure correlation between binary group and numeric feature
+- Binary categorical variable 
+- Numerical variable is continuous & normal
+✅ Point Biserial Correlation
+✔️
+
+
+
+
+
+
+13. Converting data to numeric for ML:
+(Convert categorical, boolean, ordinal, or mixed-type data to numerical format while preserving meaning and model compatibility.)
+
+14. Sampling and K-fold cross validation (Train-Test Split, Stratified K-Fold, Repeated Stratified K-Fold)
+15. Trying multiple Regression algorithms
+
+16. Selecting the best Model
+
+17. Deploying the best model in production
