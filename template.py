@@ -81,10 +81,10 @@ def scaffold_project(file_paths: List[str]) -> None:
             # Log any error that occurs during file or directory creation
             logging.error(f"Error while creating {filepath}: {e}")
 
-# ---------------------------
-# ✅ Entry Point
-# ---------------------------
-# This ensures the script only runs when called directly
-# Useful when this script is imported into other modules (it won't auto-run)
-if __name__ == "__main__":
-    scaffold_project(FILES_TO_CREATE)
+# # ---------------------------
+# # ✅ Entry Point
+# # ---------------------------
+# # This ensures the script only runs when called directly
+# # Useful when this script is imported into other modules (it won't auto-run)
+# if __name__ == "__main__":
+#     scaffold_project(FILES_TO_CREATE)

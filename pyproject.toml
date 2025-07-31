@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "insurance"
+version = "0.1.0"
+description = "Insurance fraud or claim classification project"
+authors = [
+    { name = "Mahesh", email = "pachpandemahesh300@gmail.com" }
+]
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }  # Optional
+dependencies = []  # Or keep empty if using requirements.txt
+
+[tool.setuptools.packages.find]
+where = ["."]
