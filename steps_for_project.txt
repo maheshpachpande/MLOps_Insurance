@@ -5,9 +5,10 @@ Steps:
     - if want to remove the env (conda remove --name venv --all)
 
 - create template.py file for folder structure of project
+- setup.py created with pyproject.toml file (python setup.py install).
+- requirements installed (pip install -r requirements.txt).
+- logger and exception added.
 
-- setup.py created with pyproject.toml file (python setup.py install)
-- requirements installed (pip install -r requirements.txt)
 
 1. Reading the data in Python
 
