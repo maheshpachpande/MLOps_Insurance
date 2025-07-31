@@ -6,7 +6,7 @@ Steps:
 
 - create template.py file for folder structure of project
 
-- setup.py created with pyproject.toml file
+- setup.py created with pyproject.toml file (python setup.py install)
 - requirements installed (pip install -r requirements.txt)
 
 1. Reading the data in Python
@@ -53,7 +53,6 @@ Steps:
 - Skewness (Numerical Insight)
 - Pairwise Relationships
 - Correlation Heat-map
-
 
 
 8. Feature Selection based on data distribution
