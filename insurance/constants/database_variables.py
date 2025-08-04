@@ -1,4 +1,4 @@
 
-MONGO_DB_URL = "MONGODB_URL"
-DATABASE_NAME = "insurance_try"
-COLLECTION_NAME = "data_try"
+
+DATABASE_NAME = "insurance"
+COLLECTION_NAME = "data"
