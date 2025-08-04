@@ -9,205 +9,138 @@ Steps:
 - requirements installed (pip install -r requirements.txt).
 - logger and exception added.
 
-
+============================================================================================
 1. Reading the data in Python
 
+
+============================================================================================
 2. Defining the problem statement
 
+
+============================================================================================
 3. Identifying the Target variable
-- (Regression / Classification)
+    - (Regression / Classification)
 
+
+============================================================================================
 4. Looking at the distribution of Target variable
-- (Should be Normal)
+    - (Should be Normal)
 
+
+============================================================================================
 5. Basic Data exploration:
 
-- Understand the Shape
-- Preview the Data
-- Column Information (Data types, nulls)
-- Summary stats (numerical columns)
-- Check for Missing Values
-- Check for Duplicates
-- Explore Categorical Features (value_counts)
-- Explore Numerical Features (Describe, Correlation matrix)
-- Check Unique Values per Column
-- Check for Constant (Single value for all) or Quasi-Constant Columns (a column with 99.5% zeros and a few ones)
-- Data Types Summary
+    - Understand the Shape
+    - Preview the Data
+    - Column Information (Data types, nulls)
+    - Summary stats (numerical columns)
+    - Check for Missing Values
+    - Check for Duplicates
+    - Explore Categorical Features (value_counts)
+    - Explore Numerical Features (Describe, Correlation matrix)
+    - Check Unique Values per Column
+    - Check for Constant (Single value for all) or Quasi-Constant Columns (a column with 99.5% zeros and a few ones)
+    - Data Types Summary
 
+
+============================================================================================
 6. Rejecting useless columns:
 
-- Constant Columns  or Quasi-Constant Columns
-- High Percentage of Missing Values
-- ID / Index / Name Columns
-- Duplicate Columns
-- Drop high_cardinality_cats
-- Custom Domain Filtering
+    - Constant Columns  or Quasi-Constant Columns
+    - High Percentage of Missing Values
+    - ID / Index / Name Columns
+    - Duplicate Columns
+    - Drop high_cardinality_cats
+    - Custom Domain Filtering
 
+
+============================================================================================
 7. Visual Exploratory Data Analysis:
 
-- Understand the distribution, spread, skewness, and presence of outliers for each variable using visualizations.
-- [Which numerical features are skewed, Where outliers exist, Class imbalance in categorical variables, Correlation between variables].
-- Histograms for Distribution
-- Box-plots to Detect Outliers
-- Q-Q Plots for Normality
-- Categorical Features (Bar Plots for Distribution)
-- Skewness (Numerical Insight)
-- Pairwise Relationships
-- Correlation Heat-map
+    - Understand the distribution, spread, skewness, and presence of outliers for each variable using visualizations.
+    - [Which numerical features are skewed, Where outliers exist, Class imbalance in categorical variables, Correlation between variables].
+    - Histograms for Distribution
+    - Box-plots to Detect Outliers
+    - Q-Q Plots for Normality
+    - Categorical Features (Bar Plots for Distribution)
+    - Skewness (Numerical Insight)
+    - Pairwise Relationships
+    - Correlation Heat-map
 
 
+============================================================================================
 8. Feature Selection based on data distribution
 
-Action
-Feature Property
-Reason
-Remove constant/quasi-constant
-No variability
-Useless for learning
-Transform skewed features
-Highly skewed
-To improve model performance
-Remove high correlation
-Multicollinearity
-To avoid redundancy
-Remove high-cardinality
-Over-fitting risk / no generalization
-Too sparse for ML
-Remove low-variance categorical
-Non-informative
-Doesn’t help model
+| **Action**                        | **Feature Property**       | **Reason**                                               |
+| --------------------------------- | -------------------------- | -------------------------------------------------------- |
+| Remove constant / quasi-constant  | No variability             | Feature is useless for learning—adds no information.     |
+| Transform skewed features         | Highly skewed distribution | Improves model performance and normality assumptions.    |
+| Remove highly correlated features | Multicollinearity          | Avoids redundancy and instability in model coefficients. |
+| Remove high-cardinality features  | Too many unique categories | Risks overfitting and poor generalization.               |
+| Remove low-variance categorical   | Non-informative            | Offers little to no predictive value.                    |
 
 
+
+
+============================================================================================
 9. Outlier treatment: (Reduced risk of model bias, Better performance on downstream tasks)
 
-Method
-Description
-When to Use
-✅ Capping (Winsorization)
-Replace outliers with nearest acceptable boundary (IQR-based)
-Retain data, control distortion
-✅ Z-score Filtering
-Remove rows with z-score > 3 in any column
-Data is normally distributed
-✅ Log/Power Transform
-Reduce skew and compress outliers (e.g., Yeo-Johnson, Box-Cox)
-Data is positively skewed or heavy-tailed
-✅ Model-Based (IsolationForest)
-Automatically detect and remove anomalies based on patterns
-When you have no clear distribution
+| **Method**                        | **Description**                                                              | **When to Use**                                     |
+| --------------------------------- | ---------------------------------------------------------------------------- | --------------------------------------------------- |
+| **Capping (Winsorization)**       | Replaces extreme values with nearest acceptable boundaries (e.g., IQR-based) | When you want to retain data and control distortion |
+| **Z-score Filtering**             | Removes rows where any column has a Z-score > 3                              | When data is approximately normally distributed     |
+| **Log / Power Transform**         | Reduces skewness and compresses outliers (e.g., Yeo-Johnson, Box-Cox)        | When features are positively skewed or heavy-tailed |
+| **Model-Based (IsolationForest)** | Identifies and removes anomalies based on data patterns and isolation scores | When there’s no clear distribution or threshold     |
 
 
+============================================================================================
 10. Missing Values treatment:
 
-Type
-Meaning
-MCAR (Missing Completely at Random)
-No pattern; safe to drop or impute
-MAR (Missing at Random)
-Related to observed variables (e.g., missing income depends on job)
-MNAR (Not at Random)
-Related to unobserved or hidden factors (e.g., patients hiding weight)
+========================================================================================================================================================================================
+| **Type**                                | **Meaning**                                                                  |
+| --------------------------------------- | ---------------------------------------------------------------------------- |
+| **MCAR** (Missing Completely at Random) | Missing values have no pattern; safe to drop or impute                       |
+| **MAR** (Missing at Random)             | Missingness depends on observed data (e.g., income missing for certain jobs) |
+| **MNAR** (Missing Not at Random)        | Missingness is due to unobserved factors (e.g., patients hiding weight)      |
 
-For Numerical Features:
-Method
-When to Use
-Code
-Mean/Median
-MCAR or symmetric (mean), skewed (median)
-SimpleImputer(strategy='mean')
-KNN Imputation
-MAR, and small dataset with similar neighbors
-KNNImputer()
-Model-Based Imputation
-MAR/MNAR with clear patterns
-Use regression or classifiers
-Drop Column
-> 50% missing and not essential
-df.drop(columns=[...])
-Leave as is
-Use algorithms that handle NaN (e.g., CatBoost)
-NA
+============================================================================================
 
-For Categorical Features:
-Method
-When to Use
-Code
-Mode (most frequent)
-MCAR/MAR
-SimpleImputer(strategy='most_frequent')
-'Missing' Category
-When missing is informative
-df[col].fillna("Missing")
-Drop if useless
-Too many missing & low importance
-df.drop(columns=[...])
+| **Method**                 | **When to Use**                                              | **Code**                         |
+| -------------------------- | ------------------------------------------------------------ | -------------------------------- |
+| **Mean / Median**          | - MCAR or MAR<br>- Use mean for symmetric, median for skewed | `SimpleImputer(strategy='mean')` |
+| **KNN Imputation**         | MAR, small to medium datasets, similar samples               | `KNNImputer()`                   |
+| **Model-Based Imputation** | MAR or MNAR with clear feature relationships                 | Use regression/classifier models |
+| **Drop Column**            | >50% missing and not critical                                | `df.drop(columns=[...])`         |
+| **Leave As-Is**            | When using models that handle `NaN` natively                 | e.g., CatBoost                   |
+
+============================================================================================
+
+| **Method**               | **When to Use**                                       | **Code**                                  |
+| ------------------------ | ----------------------------------------------------- | ----------------------------------------- |
+| **Mode (Most Frequent)** | MCAR or MAR                                           | `SimpleImputer(strategy='most_frequent')` |
+| **'Missing' Category**   | When missing values carry potential meaning           | `df[col].fillna("Missing")`               |
+| **Drop if Useless**      | Too many missing values and feature is low-importance | `df.drop(columns=[...])`                  |
+
+============================================================================================
 
 11. Visual correlation analysis:
     • Multicollinearity between features → reduce redundancy
     • Positive/Negative relationships → feature engineering
     • Clustering → similar features can be grouped or averaged
 
+============================================================================================
+
 12. Statistical correlation analysis (Feature Selection):
 
-Statistical Tests for Correlation (Based on Data Type):
-Feature Type
-Target Type
-Recommended Test
-Purpose
-Numerical
-Numerical
-Pearson / Spearman correlation
-Linear / monotonic relationship
-Categorical
-Categorical
-Chi-Square test
-Association strength
-Numerical
-Categorical
-ANOVA / Mutual Information
-Group mean differences
-Categorical
-Numerical
-Point Biserial / Mutual Info
-Correlation between class & num
 
-Statistical Feature Selection Methods:
-Feature → Target Type
-🧭 Purpose
-✅ Assumptions
-🧪 Best Method
-📐 Parametric?
-Numerical → Numerical
-Measure strength & direction of linear or monotonic relationship
-- Continuous variables 
-- Linear (Pearson) 
-- Normal distribution (Pearson) 
-- No outliers (Pearson)
-✅ Pearson Correlation ✅ Spearman Rank Correlation
-✔️ (Pearson) 
-❌ (Spearman)
-Numerical → Categorical (binary or multi-class)
-Test if means of numeric feature differ between categories
-- Numeric feature is normally distributed 
-- Homogeneity of variance - Independent samples
-✅ ANOVA F-test ✅ Kruskal–Wallis H-test (non-parametric)
-✔️ (ANOVA) 
-❌ (Kruskal–Wallis)
-Categorical → Categorical
-Test if categories are associated
-- Categorical data only 
-- Expected frequency ≥ 5 
-- Independent samples
-✅ Chi-Square Test ✅ Fisher’s Exact Test (2x2 only)
-✔️ (Chi-Square) 
-❌ (Fisher)
-Categorical (binary) → Numerical
-Measure correlation between binary group and numeric feature
-- Binary categorical variable 
-- Numerical variable is continuous & normal
-✅ Point Biserial Correlation
-✔️
+(Statistical Tests for Correlation (Based on Feature and Target Type))
 
+| **Feature Type** | **Target Type** | **Recommended Test**                        | **Purpose**                                                  |
+| ---------------- | --------------- | ------------------------------------------- | ------------------------------------------------------------ |
+| Numerical        | Numerical       | **Pearson** / **Spearman Correlation**      | Assess linear or monotonic relationship                      |
+| Categorical      | Categorical     | **Chi-Square Test**                         | Test association strength between categories                 |
+| Numerical        | Categorical     | **ANOVA F-test** / **Mutual Information**   | Evaluate group mean differences                              |
+| Categorical      | Numerical       | **Point Biserial** / **Mutual Information** | Assess correlation between binary class and numeric variable |
 
 
 
