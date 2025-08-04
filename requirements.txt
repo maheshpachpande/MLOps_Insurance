@@ -10,6 +10,8 @@ statsmodels
 pymongo
 dotenv
 certifi
+dill
+pyyaml
 
 -e .
 

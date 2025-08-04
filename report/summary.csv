@@ -1,14 +1,17 @@
 Feature,Count,Missing,Mean,Median,Std Dev,Variance,Min,25% (Q1),75% (Q3),Max,Range,IQR,Skewness,Skewness Type,Kurtosis,Tails,Normality Test,Normality p-value,Normality,Recommended Test Type,Outliers
 months_as_customer,1000,0,203.95,199.5,115.11,13251.04,0.0,115.75,276.25,479.0,479.0,160.5,0.3616,Approximately Symmetric,2.511,Platykurtic (Light Tails),Shapiro-Wilk,0.0,Not Normal,Non-Parametric,None
 age,1000,0,38.95,38.0,9.14,83.54,19.0,32.0,44.0,64.0,45.0,12.0,0.4783,Approximately Symmetric,2.7351,Platykurtic (Light Tails),Shapiro-Wilk,0.0,Not Normal,Non-Parametric,Mild
+policy_deductable,1000,0,1136.0,1000.0,611.86,374378.38,500.0,500.0,2000.0,2000.0,1500.0,1500.0,0.4772,Approximately Symmetric,1.6239,Platykurtic (Light Tails),Shapiro-Wilk,0.0,Not Normal,Non-Parametric,None
 policy_annual_premium,1000,0,1256.41,1257.2,244.17,59617.72,433.33,1089.61,1415.7,2047.59,1614.26,326.09,0.0044,Approximately Symmetric,3.0675,Leptokurtic (Heavy Tails),Shapiro-Wilk,0.9793,Normal,Parametric,Mild
+umbrella_limit,1000,0,1101000.0,0.0,2297406.6,5278077077077.08,-1000000.0,0.0,0.0,10000000.0,11000000.0,0.0,1.804,Highly Right-Skewed,4.7771,Leptokurtic (Heavy Tails),Shapiro-Wilk,0.0,Not Normal,Non-Parametric,Severe
 capital-gains,1000,0,25126.1,0.0,27872.19,776858847.64,0.0,0.0,51025.0,100500.0,100500.0,51025.0,0.4781,Approximately Symmetric,1.7237,Platykurtic (Light Tails),Shapiro-Wilk,0.0,Not Normal,Non-Parametric,None
 capital-loss,1000,0,-26793.7,-23250.0,28104.1,789840250.56,-111100.0,-51500.0,0.0,0.0,111100.0,51500.0,-0.3909,Approximately Symmetric,1.6867,Platykurtic (Light Tails),Shapiro-Wilk,0.0,Not Normal,Non-Parametric,None
+incident_hour_of_the_day,1000,0,11.64,12.0,6.95,48.32,0.0,6.0,17.0,23.0,23.0,11.0,-0.0355,Approximately Symmetric,1.807,Platykurtic (Light Tails),Shapiro-Wilk,0.0,Not Normal,Non-Parametric,None
+number_of_vehicles_involved,1000,0,1.84,1.0,1.02,1.04,1.0,1.0,3.0,4.0,3.0,2.0,0.5019,Moderately Right-Skewed,1.501,Platykurtic (Light Tails),Shapiro-Wilk,0.0,Not Normal,Non-Parametric,None
+bodily_injuries,1000,0,0.99,1.0,0.82,0.67,0.0,0.0,2.0,2.0,2.0,2.0,0.0148,Approximately Symmetric,1.4884,Platykurtic (Light Tails),Shapiro-Wilk,0.0,Not Normal,Non-Parametric,None
+witnesses,1000,0,1.49,1.0,1.11,1.24,0.0,1.0,2.0,3.0,3.0,1.0,0.0196,Approximately Symmetric,1.6571,Platykurtic (Light Tails),Shapiro-Wilk,0.0,Not Normal,Non-Parametric,None
 total_claim_amount,1000,0,52761.94,58055.0,26401.53,697040954.79,100.0,41812.5,70592.5,114920.0,114820.0,28780.0,-0.5937,Moderately Left-Skewed,2.5422,Platykurtic (Light Tails),Shapiro-Wilk,0.0,Not Normal,Non-Parametric,Mild
 injury_claim,1000,0,7433.42,6775.0,4880.95,23823690.99,0.0,4295.0,11305.0,21450.0,21450.0,7010.0,0.2644,Approximately Symmetric,2.2347,Platykurtic (Light Tails),Shapiro-Wilk,0.0,Not Normal,Non-Parametric,None
 property_claim,1000,0,7399.57,6750.0,4824.73,23277982.7,0.0,4445.0,10885.0,23670.0,23670.0,6440.0,0.3776,Approximately Symmetric,2.6195,Platykurtic (Light Tails),Shapiro-Wilk,0.0,Not Normal,Non-Parametric,Mild
 vehicle_claim,1000,0,37928.95,42100.0,18886.25,356690548.35,70.0,30292.5,50822.5,79560.0,79490.0,20530.0,-0.6202,Moderately Left-Skewed,2.5497,Platykurtic (Light Tails),Shapiro-Wilk,0.0,Not Normal,Non-Parametric,None
 auto_year,1000,0,2005.1,2005.0,6.02,36.19,1995.0,2000.0,2010.0,2015.0,20.0,10.0,-0.0482,Approximately Symmetric,1.828,Platykurtic (Light Tails),Shapiro-Wilk,0.0,Not Normal,Non-Parametric,None
-claim_ratio,1000,0,43.73,44.95,24.62,605.9,0.06740679325662441,32.33,58.64,157.7508785630613,157.68,26.31,0.1598,Approximately Symmetric,3.4137,Leptokurtic (Heavy Tails),Shapiro-Wilk,0.0,Not Normal,Non-Parametric,Moderate
-combined_claims,1000,0,52761.94,58055.0,26401.53,697040954.79,100.0,41812.5,70592.5,114920.0,114820.0,28780.0,-0.5937,Moderately Left-Skewed,2.5422,Platykurtic (Light Tails),Shapiro-Wilk,0.0,Not Normal,Non-Parametric,Mild
-vehicle_age,1000,0,19.9,20.0,6.02,36.19,10.0,15.0,25.0,30.0,20.0,10.0,0.0482,Approximately Symmetric,1.828,Platykurtic (Light Tails),Shapiro-Wilk,0.0,Not Normal,Non-Parametric,None

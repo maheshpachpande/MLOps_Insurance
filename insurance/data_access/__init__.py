@@ -14,7 +14,7 @@ from insurance.exception import CustomException
 load_dotenv()  # Load MONGO_DB_URL from .env
 
 
-class VisaData:
+class InsuranceData:
     """
     This class helps to export entire MongoDB collection as a pandas DataFrame
     and to insert CSV data into MongoDB.
@@ -83,7 +83,7 @@ class VisaData:
 # Run this as a script
 if __name__ == "__main__":
     try:
-        visa = VisaData()
+        visa = InsuranceData()
         df = visa.export_collection_as_dataframe(database_name=DATABASE_NAME, collection_name=COLLECTION_NAME)
         print(df.head())  # Preview data
     except Exception as err:

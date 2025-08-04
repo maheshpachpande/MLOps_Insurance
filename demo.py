@@ -1,9 +1,14 @@
 from insurance.logger import logging
 from insurance.exception import CustomException
 
-logging.info("Logging has started")
+from insurance.pipeline.training_pipeline import TrainingPipeline
+
+
+
 
 try:
-    a = 1/0
+    training_pipeline = TrainingPipeline()
+    training_pipeline.run_pipeline()
 except Exception as e:
+    logging.error("❌ Pipeline execution failed.", exc_info=True)
     raise CustomException(e)
