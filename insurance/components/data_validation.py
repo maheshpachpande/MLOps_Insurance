@@ -6,7 +6,8 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 
-from insurance.constants.training_pipeline import SCHEMA_FILE_PATH
+
+from insurance.constants.training_pipeline import SCHEMA_FILE_PATH, OUTPUT_PATH
 from insurance.entity.artifact_entity import DataIngestionArtifact, DataValidationArtifact
 from insurance.entity.config_entity import DataIngestionConfig, DataValidationConfig
 from insurance.exception import CustomException
@@ -173,51 +174,57 @@ class DataValidation:
             train_df = self.read_data(train_file_path)
             test_df = self.read_data(test_file_path)
 
-            if not self.validate_number_of_columns(train_df):
-                error_message += "Train data: incorrect number of columns.\n"
-            if not self.validate_number_of_columns(test_df):
-                error_message += "Test data: incorrect number of columns.\n"
+            # Basic schema checks
+            schema_checks = all([
+                self.validate_number_of_columns(train_df),
+                self.validate_number_of_columns(test_df),
+                self.is_numerical_column_exist(train_df),
+                self.is_numerical_column_exist(test_df),
+                self.is_categorical_column_exist(train_df),
+                self.is_categorical_column_exist(test_df),
+            ])
 
-            if not self.is_numerical_column_exist(train_df):
-                error_message += "Train data: missing numerical columns.\n"
-            if not self.is_numerical_column_exist(test_df):
-                error_message += "Test data: missing numerical columns.\n"
+            if not schema_checks:
+                error_message += "❌ Schema validation failed.\n"
 
-            if not self.is_categorical_column_exist(train_df):
-                error_message += "Train data: missing categorical columns.\n"
-            if not self.is_categorical_column_exist(test_df):
-                error_message += "Test data: missing categorical columns.\n"
-
-            if error_message:
-                raise Exception(error_message)
-
-            # Dataset Drift / Covariate Shift
-            drift_status = self.detect_dataset_drift(
+            # Drift check
+            drift_passed = self.detect_dataset_drift(
                 train_df.drop(columns=[self._schema_config["target_column"][0]]),
                 test_df.drop(columns=[self._schema_config["target_column"][0]])
             )
 
-            # Prior Probability Drift
+            # Prior prob drift
             prior_drift = self.detect_prior_probability_drift(
                 train_df, test_df, self._schema_config["target_column"][0]
             )
 
-            # Concept Drift
+            # Concept drift (accuracy score)
             concept_accuracy = self.detect_concept_drift(
                 train_df.copy(), test_df.copy(), self._schema_config["target_column"]
             )
-            logging.info(f"Concept Drift Accuracy on test: {concept_accuracy:.4f}")
+            concept_passed = concept_accuracy >= 0.7
 
-            if concept_accuracy < 0.7:
-                logging.warning("⚠️ Possible Concept Drift: accuracy below threshold (0.7)")
+            if not concept_passed:
+                logging.warning("⚠️ Concept Drift Detected")
+
+            # Final validation status
+            validation_status = schema_checks and drift_passed and concept_passed
+            
+
+
+            if not validation_status:
+                logging.error(error_message + "Validation failed.")
 
             data_validation_artifact = DataValidationArtifact(
-                validation_status=drift_status,
+                validation_status=validation_status,
                 valid_train_file_path=train_file_path,
                 valid_test_file_path=test_file_path,
-                invalid_train_file_path="",
-                invalid_test_file_path="",
                 drift_report_file_path=self.data_validation_config.drift_report_file_path
+            )
+            
+            write_yaml_file(
+                file_path=OUTPUT_PATH,  # e.g., artifacts/validation.yaml
+                content=data_validation_artifact.__dict__
             )
 
             logging.info(f"✅ Data Validation Artifact: {data_validation_artifact}")

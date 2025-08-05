@@ -12,6 +12,8 @@ dotenv
 certifi
 dill
 pyyaml
+imblearn
+scipy
 
 -e .
 

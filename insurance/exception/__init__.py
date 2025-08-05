@@ -19,12 +19,12 @@ def error_message_detail(error: Exception) -> str:
     )
 
 class CustomException(Exception):
-    def __init__(self, error_message: Exception):
-        super().__init__(str(error_message))
-        self.error_message = error_message_detail(error_message)
+    def __init__(self, message):
+        self.message = message
+        super().__init__(self.message)
 
-    def __str__(self):
-        return self.error_message
+    # def __str__(self):
+    #     return self.error_message
 
 # # Simulate an error
 # if __name__ == "__main__":
