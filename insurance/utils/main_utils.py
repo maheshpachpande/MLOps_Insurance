@@ -7,7 +7,7 @@ import numpy as np
 from insurance.exception import CustomException
 from insurance.logger import logging
 
-
+from sklearn.preprocessing import LabelEncoder
 
 def from_root():
     return os.path.dirname(os.path.abspath(__file__))
@@ -56,7 +56,7 @@ def load_numpy_array_data(file_path: str) -> np.ndarray:
     """
     try:
         with open(file_path, "rb") as file_obj:
-            return np.load(file_obj)
+            return np.load(file_obj, allow_pickle=True)
     except Exception as e:
         raise CustomException(e) 
 

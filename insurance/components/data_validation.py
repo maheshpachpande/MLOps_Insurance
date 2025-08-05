@@ -160,7 +160,7 @@ class DataValidation:
             predictions = model.predict(X_test)
 
             accuracy = accuracy_score(y_test, predictions)
-            return accuracy
+            return float(accuracy)
         except Exception as e:
             raise CustomException(e)
 

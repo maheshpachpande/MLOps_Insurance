@@ -57,3 +57,15 @@ class DataTransformationConfig:
         training_pipeline.PREPROCSSING_OBJECT_FILE_NAME,)
 
 
+
+@dataclass
+class ModelTrainerConfig:
+        model_trainer_dir: str = os.path.join(
+        training_pipeline_config.artifact_dir, training_pipeline.MODEL_TRAINER_DIR_NAME
+        )
+        trained_model_file_path: str = os.path.join(
+        model_trainer_dir, training_pipeline.MODEL_TRAINER_TRAINED_MODEL_DIR, 
+        training_pipeline.MODEL_FILE_NAME
+        )
+        expected_accuracy: float = training_pipeline.MODEL_TRAINER_EXPECTED_SCORE
+        overfitting_underfitting_threshold = training_pipeline.MODEL_TRAINER_OVER_FIITING_UNDER_FITTING_THRESHOLD

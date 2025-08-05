@@ -1,4 +1,4 @@
 drift_report_file_path: artifact/data_validation/drift_report/report.yaml
 valid_test_file_path: artifact/data_ingestion/ingested/test.csv
 valid_train_file_path: artifact/data_ingestion/ingested/train.csv
-validation_status: true
+validation_status: false
