@@ -1,15 +1,15 @@
-from insurance.entity.config_entity import (
-    TrainingPipelineConfig,
-    DataIngestionConfig,
-)
+from insurance.entity.config_entity import (TrainingPipelineConfig,
+                                            DataIngestionConfig,
+                                            DataValidationConfig)
 
-from insurance.entity.artifact_entity import DataIngestionArtifact
+from insurance.entity.artifact_entity import (DataIngestionArtifact,
+                                              DataValidationArtifact)
+
 from insurance.components.data_ingestion import DataIngestion
+from insurance.components.data_validation import DataValidation
 from insurance.exception import CustomException
 from insurance.logger import logging
 
-import os
-import sys
 
 
 class TrainingPipeline:
@@ -28,11 +28,35 @@ class TrainingPipeline:
         except Exception as e:
             logging.error("❌ Error during data ingestion.", exc_info=True)
             raise CustomException(e)
+        
+        
+    def start_data_validation(self) -> DataValidationArtifact:
+        try:
+            data_ingestion_config = DataIngestionConfig()
+            data_ingestion_artifact = DataIngestionArtifact(trained_file_path=data_ingestion_config.training_file_path,
+                                                            test_file_path=data_ingestion_config.testing_file_path)
+
+            data_validation_config = DataValidationConfig()
+            data_validation = DataValidation(
+                data_ingestion_artifact=data_ingestion_artifact,
+                data_validation_config=data_validation_config
+            )
+            data_validation_artifact = data_validation.initiate_data_validation()
+            
+            logging.info("✅ Data validation completed.")
+            return data_validation_artifact
+            
+        except Exception as e:
+            logging.error("❌ Error during data validation.", exc_info=True)
+            raise CustomException(e)
+            
+        
 
     def run_pipeline(self):
         try:
             logging.info("🚀 Starting training pipeline.")
             data_ingestion_artifact: DataIngestionArtifact = self.start_data_ingestion()
+            data_validation_artifact: DataValidationArtifact = self.start_data_validation()
             logging.info("✅ Pipeline executed successfully.")
         except Exception as e:
             logging.error("❌ Pipeline execution failed.", exc_info=True)
