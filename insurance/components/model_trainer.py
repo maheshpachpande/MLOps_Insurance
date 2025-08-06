@@ -25,6 +25,11 @@ from insurance.utils.main_utils import (load_numpy_array_data,
                                         write_yaml_file)
 
 from dataclasses import asdict
+import warnings
+warnings.filterwarnings('ignore', category=UserWarning, module='xgboost')
+
+
+
 
 
 class ModelTrainer:
@@ -57,7 +62,7 @@ class ModelTrainer:
                     }
                 },
                 "XGBClassifier": {
-                    "model": XGBClassifier(use_label_encoder=False, eval_metric='logloss'),
+                    "model": XGBClassifier(eval_metric='logloss'),
                     "params": {
                         "n_estimators": [50, 100, 200],
                         "max_depth": [3, 5, 7],
@@ -79,7 +84,7 @@ class ModelTrainer:
                     scoring="f1_macro",
                     cv=3,
                     n_jobs=-1,
-                    verbose=0
+                    verbose=1
                 )
                 grid_search.fit(x_train, y_train)
                 logging.info(f"{name} best F1_macro score: {grid_search.best_score_}")

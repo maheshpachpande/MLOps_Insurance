@@ -4,7 +4,8 @@ from insurance.entity.config_entity import (
     DataValidationConfig,
     DataTransformationConfig,
     ModelTrainerConfig,
-    ModelEvaluationConfig
+    ModelEvaluationConfig,
+    ModelPusherConfig
 )
 
 
@@ -14,7 +15,8 @@ from insurance.entity.artifact_entity import (
     DataValidationArtifact,
     DataTransformationArtifact,
     ModelTrainerArtifact,
-    ModelEvaluationArtifact
+    ModelEvaluationArtifact,
+    ModelPusherArtifact
 )
 
 from insurance.components.data_ingestion import DataIngestion
@@ -22,6 +24,7 @@ from insurance.components.data_validation import DataValidation
 from insurance.components.data_transformation import DataTransformation
 from insurance.components.model_trainer import ModelTrainer
 from insurance.components.model_evaluation import ModelEvaluation
+from insurance.components.model_pusher import ModelPusher
 
 from insurance.exception import CustomException
 from insurance.logger import logging
@@ -107,6 +110,16 @@ class TrainingPipeline:
             raise  CustomException(e, sys)
     
     
+    def start_model_pusher(self, model_eval_artifact:ModelEvaluationArtifact):
+        try:
+            model_pusher_config = ModelPusherConfig()
+            model_pusher = ModelPusher(model_pusher_config, model_eval_artifact)
+            model_pusher_artifact = model_pusher.initiate_model_pusher()
+            return model_pusher_artifact
+        except  Exception as e:
+            raise  CustomException(e, sys)
+    
+    
     def run_pipeline(self):
         try:
             logging.info("🚀 Starting training pipeline.")
@@ -119,6 +132,8 @@ class TrainingPipeline:
             model_eval_artifact = self.start_model_evaluation(data_validation_artifact, model_trainer_artifact)
             if not model_eval_artifact.is_model_accepted:
                 raise Exception("Trained model is not better than the best model")
+            
+            model_pusher_artifact = self.start_model_pusher(model_eval_artifact)
 
             logging.info("✅ Training pipeline completed successfully.")
 

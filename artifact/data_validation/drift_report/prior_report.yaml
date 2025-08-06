@@ -1,8 +1,8 @@
 N:
-  absolute_difference: 0.00666666666666671
-  base_probability: 0.7546666666666667
-  current_probability: 0.748
+  absolute_difference: 0.0013333333333332975
+  base_probability: 0.7533333333333333
+  current_probability: 0.752
 Y:
-  absolute_difference: 0.006666666666666682
-  base_probability: 0.24533333333333332
-  current_probability: 0.252
+  absolute_difference: 0.0013333333333333253
+  base_probability: 0.24666666666666667
+  current_probability: 0.248

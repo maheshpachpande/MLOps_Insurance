@@ -1,6 +1,6 @@
 age:
   drift_status: &id001 !!python/object/apply:numpy._core.multiarray.scalar
-  - !!python/object/apply:numpy.dtype
+  - &id002 !!python/object/apply:numpy.dtype
     args:
     - b1
     - false
@@ -16,94 +16,97 @@ age:
     - 0
   - !!binary |
     AA==
-  p_value: 0.1266555556634004
+  p_value: 0.6200208789083654
 authorities_contacted:
   drift_status: *id001
-  p_value: 0.9999999999994331
+  p_value: 0.8673124306517257
 auto_make:
   drift_status: *id001
   p_value: 0.6815934044551095
 auto_year:
   drift_status: *id001
-  p_value: 0.6200208789083654
+  p_value: 0.8275938817806103
 bodily_injuries:
   drift_status: *id001
-  p_value: 0.989307418543381
+  p_value: 0.8774908902153534
 capital-gains:
   drift_status: *id001
-  p_value: 0.8995920411828514
+  p_value: 0.11615930467283682
 capital-loss:
   drift_status: *id001
-  p_value: 0.919512443836103
+  p_value: 0.1266555556634004
 collision_type:
   drift_status: *id001
-  p_value: 0.989307418543381
+  p_value: 0.7121750674193509
 incident_hour_of_the_day:
   drift_status: *id001
-  p_value: 0.41785247142416254
+  p_value: 0.3437618208353567
 incident_severity:
   drift_status: *id001
-  p_value: 0.32110503288230974
+  p_value: 0.7121750674193509
 incident_state:
   drift_status: *id001
-  p_value: 0.44449334942699326
+  p_value: 0.9999998765558903
 incident_type:
   drift_status: *id001
-  p_value: 0.9370961327604651
+  p_value: 0.8002935491431424
 injury_claim:
   drift_status: *id001
-  p_value: 0.36745220110722016
+  p_value: 0.22335047169495956
 insured_education_level:
   drift_status: *id001
-  p_value: 0.9981654157284734
+  p_value: 0.9649456240184902
 insured_hobbies:
   drift_status: *id001
-  p_value: 0.20682023933636834
+  p_value: 0.9981654157284734
 insured_occupation:
   drift_status: *id001
-  p_value: 0.8995920411828514
+  p_value: 0.7121750674193509
 insured_relationship:
   drift_status: *id001
-  p_value: 0.9999988382921076
+  p_value: 0.9991574437204568
 insured_sex:
   drift_status: *id001
-  p_value: 0.9999988382921076
+  p_value: 0.9996601643052309
 months_as_customer:
   drift_status: *id001
-  p_value: 0.1266555556634004
+  p_value: 0.8275938817806103
 number_of_vehicles_involved:
   drift_status: *id001
-  p_value: 0.9999988382921076
+  p_value: 1.0
 police_report_available:
   drift_status: *id001
-  p_value: 1.0
+  p_value: 0.9981654157284734
 policy_annual_premium:
   drift_status: *id001
-  p_value: 0.5591996234401292
+  p_value: 0.8995920411828514
 policy_csl:
   drift_status: *id001
-  p_value: 0.9999999997714684
+  p_value: 1.0
 policy_deductable:
   drift_status: *id001
-  p_value: 0.8275938817806103
+  p_value: 0.6200208789083654
 policy_state:
   drift_status: *id001
-  p_value: 0.5294757647328986
+  p_value: 0.7717794020650939
 property_claim:
-  drift_status: *id001
-  p_value: 0.650805135502965
+  drift_status: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id002
+  - !!binary |
+    AQ==
+  p_value: 0.03336468061899869
 property_damage:
   drift_status: *id001
-  p_value: 0.8774908902153534
+  p_value: 0.9998831357530187
 total_claim_amount:
   drift_status: *id001
-  p_value: 0.3437618208353567
+  p_value: 0.32110503288230974
 umbrella_limit:
   drift_status: *id001
-  p_value: 0.8995920411828514
+  p_value: 0.44449334942699326
 vehicle_claim:
   drift_status: *id001
-  p_value: 0.7717794020650939
+  p_value: 0.39215854922720245
 witnesses:
   drift_status: *id001
-  p_value: 0.6200208789083654
+  p_value: 0.9370961327604651

@@ -13,7 +13,7 @@ from insurance.utils.main_utils import (save_object,
                                         load_object,
                                         write_yaml_file,
                                         read_yaml_file)
-
+from insurance.constants.training_pipeline import MODEL_EVAL_ARTIFACT_FILE_NAME
 import shutil
 
 class ModelPusher:
@@ -55,7 +55,8 @@ class ModelPusher:
 
 if __name__ == "__main__":
     try:
-        model_eval = read_yaml_file(file_path="artifact/model_evaluation/model_evaluation_artifact.yaml")
+        # model_eval = read_yaml_file(file_path="artifact/model_evaluation/model_evaluation_artifact.yaml")
+        model_eval = read_yaml_file(file_path=MODEL_EVAL_ARTIFACT_FILE_NAME)
         
         model_evaluation = ModelEvaluationConfig()
         model_evaluation_artifact = ModelEvaluationArtifact(
