@@ -21,7 +21,10 @@ from insurance.ml.model.estimator import InsuranceModel
 
 from insurance.utils.main_utils import (load_numpy_array_data, 
                                         save_object, 
-                                        load_object)
+                                        load_object,
+                                        write_yaml_file)
+
+from dataclasses import asdict
 
 
 class ModelTrainer:
@@ -153,6 +156,9 @@ class ModelTrainer:
                 train_metric_artifact=classification_train_metric,
                 test_metric_artifact=classification_test_metric
             )
+            
+            # Write yaml file
+            write_yaml_file(file_path=self.model_trainer_config.artifact_yaml_path, content=asdict(model_trainer_artifact))
 
             logging.info(f"Model trainer completed. Artifact: {model_trainer_artifact}")
             return model_trainer_artifact

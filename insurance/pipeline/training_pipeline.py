@@ -3,20 +3,23 @@ from insurance.entity.config_entity import (
     DataIngestionConfig,
     DataValidationConfig,
     DataTransformationConfig,
-    ModelTrainerConfig
+    ModelTrainerConfig,
+    ModelEvaluationConfig
 )
 
 from insurance.entity.artifact_entity import (
     DataIngestionArtifact,
     DataValidationArtifact,
     DataTransformationArtifact,
-    ModelTrainerArtifact
+    ModelTrainerArtifact,
+    ModelEvaluationArtifact
 )
 
 from insurance.components.data_ingestion import DataIngestion
 from insurance.components.data_validation import DataValidation
 from insurance.components.data_transformation import DataTransformation
 from insurance.components.model_trainer import ModelTrainer
+from insurance.components.model_evaluation import ModelEvaluation
 
 from insurance.exception import CustomException
 from insurance.logger import logging
@@ -88,6 +91,20 @@ class TrainingPipeline:
             logging.error("❌ Error during model training.", exc_info=True)
             raise CustomException(e)
 
+
+    
+    def start_model_evaluation(self,data_validation_artifact:DataValidationArtifact,
+                                 model_trainer_artifact:ModelTrainerArtifact,
+                                ):
+        try:
+            model_eval_config = ModelEvaluationConfig()
+            model_eval = ModelEvaluation(model_eval_config, data_validation_artifact, model_trainer_artifact)
+            model_eval_artifact = model_eval.initiate_model_evaluation()
+            return model_eval_artifact
+        except  Exception as e:
+            raise  CustomException(e)
+    
+    
     def run_pipeline(self):
         try:
             logging.info("🚀 Starting training pipeline.")
@@ -97,6 +114,9 @@ class TrainingPipeline:
             data_validation_artifact = self.start_data_validation(data_ingestion_artifact)
             data_transformation_artifact = self.start_data_transformation(data_validation_artifact)
             model_trainer_artifact = self.start_model_trainer(data_transformation_artifact)
+            model_eval_artifact = self.start_model_evaluation(data_validation_artifact, model_trainer_artifact)
+            if not model_eval_artifact.is_model_accepted:
+                raise Exception("Trained model is not better than the best model")
 
             logging.info("✅ Training pipeline completed successfully.")
 

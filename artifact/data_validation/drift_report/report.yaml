@@ -1,93 +1,93 @@
 age:
   drift_status: false
-  p_value: 0.29949005317044475
+  p_value: 0.939298150626693
 authorities_contacted:
   drift_status: false
-  p_value: 0.9980565024392214
+  p_value: 0.9705463707107949
 auto_make:
   drift_status: false
-  p_value: 0.44449334942699326
+  p_value: 0.7829141915645983
 auto_year:
   drift_status: false
-  p_value: 0.9752472530154285
+  p_value: 0.9160826991755253
 bodily_injuries:
   drift_status: false
-  p_value: 0.989307418543381
+  p_value: 0.9998149276030658
 capital-gains:
-  drift_status: false
-  p_value: 0.8534124195825724
+  drift_status: true
+  p_value: 0.04444726415006211
 capital-loss:
   drift_status: false
-  p_value: 0.29949005317044475
+  p_value: 0.9675877558447975
 collision_type:
   drift_status: false
-  p_value: 0.650805135502965
+  p_value: 0.9999581054379987
 incident_hour_of_the_day:
   drift_status: false
-  p_value: 0.1266555556634004
+  p_value: 0.9972596935854263
 incident_severity:
   drift_status: false
-  p_value: 0.9999999999999938
+  p_value: 0.9633858233186512
 incident_state:
   drift_status: false
-  p_value: 0.3437618208353567
+  p_value: 0.6122759744219011
 incident_type:
   drift_status: false
-  p_value: 0.9999998765558903
+  p_value: 0.9999996962814652
 injury_claim:
   drift_status: false
-  p_value: 0.9649456240184902
+  p_value: 0.5858759606590891
 insured_education_level:
   drift_status: false
-  p_value: 0.989307418543381
+  p_value: 0.957769298233464
 insured_hobbies:
   drift_status: false
-  p_value: 0.6200208789083654
+  p_value: 0.6907923793453117
 insured_occupation:
   drift_status: false
-  p_value: 0.919512443836103
+  p_value: 0.7357537064015242
 insured_relationship:
   drift_status: false
-  p_value: 0.989307418543381
+  p_value: 0.9951916356548752
 insured_sex:
   drift_status: false
-  p_value: 0.8995920411828514
+  p_value: 0.9628965701848762
 months_as_customer:
-  drift_status: true
-  p_value: 0.030027241710997462
+  drift_status: false
+  p_value: 0.9919286946819228
 number_of_vehicles_involved:
   drift_status: false
-  p_value: 0.999999992358817
+  p_value: 0.9999999999999718
 police_report_available:
   drift_status: false
-  p_value: 0.999967031467023
+  p_value: 1.0
 policy_annual_premium:
   drift_status: false
-  p_value: 0.919512443836103
+  p_value: 0.44967016034732216
 policy_csl:
   drift_status: false
-  p_value: 0.8995920411828514
+  p_value: 0.9999999957938296
 policy_deductable:
   drift_status: false
-  p_value: 0.9752472530154285
+  p_value: 1.0
 policy_state:
   drift_status: false
-  p_value: 1.0
+  p_value: 0.7221297098807012
 property_claim:
   drift_status: false
-  p_value: 0.11615930467283682
+  p_value: 0.5746510715804812
 property_damage:
   drift_status: false
-  p_value: 1.0
+  p_value: 0.3267011422872141
 total_claim_amount:
   drift_status: false
-  p_value: 0.8774908902153534
+  p_value: 0.4770190630217189
 umbrella_limit:
   drift_status: false
-  p_value: 0.999999992358817
+  p_value: 0.8196463138691285
 vehicle_claim:
   drift_status: false
-  p_value: 0.9370961327604651
+  p_value: 0.9128933330950199
 witnesses:
   drift_status: false
-  p_value: 0.6200208789083654
+  p_value: 0.9999946945807144

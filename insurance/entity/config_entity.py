@@ -69,3 +69,14 @@ class ModelTrainerConfig:
         )
         expected_accuracy: float = training_pipeline.MODEL_TRAINER_EXPECTED_SCORE
         overfitting_underfitting_threshold = training_pipeline.MODEL_TRAINER_OVER_FIITING_UNDER_FITTING_THRESHOLD
+        artifact_yaml_path = os.path.join(ARTIFACT_DIR, MODEL_TRAINER_DIR_NAME, MODEL_ARTIFACT_FILE_NAME)
+
+
+@dataclass
+class ModelEvaluationConfig:
+        model_evaluation_dir: str = os.path.join(
+        training_pipeline_config.artifact_dir, training_pipeline.MODEL_EVALUATION_DIR_NAME
+        )
+        report_file_path = os.path.join( model_evaluation_dir,training_pipeline.MODEL_EVALUATION_REPORT_NAME)
+        change_threshold = training_pipeline.MODEL_EVALUATION_CHANGED_THRESHOLD_SCORE
+

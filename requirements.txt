@@ -15,6 +15,9 @@ pyyaml
 imblearn
 scipy
 catboost
+fastapi
+uvicorn
+
 
 
 -e .
