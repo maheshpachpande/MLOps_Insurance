@@ -1,0 +1,9 @@
+best_model_metric_artifact: null
+best_model_path: ''
+improved_accuracy: 0.0
+is_model_accepted: true
+train_model_metric_artifact:
+  f1_score: 0.9071618037135278
+  precision_score: 0.8952879581151832
+  recall_score: 0.9193548387096774
+trained_model_path: artifact/model_trainer/trained_model/model.pkl

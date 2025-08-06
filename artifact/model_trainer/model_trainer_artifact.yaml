@@ -1,9 +1,9 @@
 test_metric_artifact:
-  f1_score: 0.9027027027027027
-  precision_score: 0.8652849740932642
-  recall_score: 0.943502824858757
+  f1_score: 0.9071618037135278
+  precision_score: 0.8952879581151832
+  recall_score: 0.9193548387096774
 train_metric_artifact:
-  f1_score: 0.9109075770191507
-  precision_score: 0.8738019169329073
-  recall_score: 0.951304347826087
+  f1_score: 0.9124270225187656
+  precision_score: 0.8614173228346457
+  recall_score: 0.9698581560283688
 trained_model_file_path: artifact/model_trainer/trained_model/model.pkl

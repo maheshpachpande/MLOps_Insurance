@@ -2,7 +2,7 @@
 from dataclasses import dataclass
 import os
 from insurance.constants  import training_pipeline
-
+from datetime import datetime
 from insurance.constants.training_pipeline import *
 
 
@@ -74,9 +74,27 @@ class ModelTrainerConfig:
 
 @dataclass
 class ModelEvaluationConfig:
-        model_evaluation_dir: str = os.path.join(
-        training_pipeline_config.artifact_dir, training_pipeline.MODEL_EVALUATION_DIR_NAME
-        )
-        report_file_path = os.path.join( model_evaluation_dir,training_pipeline.MODEL_EVALUATION_REPORT_NAME)
+        model_evaluation_dir: str = os.path.join(training_pipeline_config.artifact_dir, 
+                                                 training_pipeline.MODEL_EVALUATION_DIR_NAME)
+        
+        # report_file_path = os.path.join(ARTIFACT_DIR,
+        #                                 training_pipeline.MODEL_EVALUATION_DIR_NAME,
+        #                                 training_pipeline.MODEL_EVAL_ARTIFACT_FILE_NAME)
+        report_file_path: str = os.path.join(model_evaluation_dir,
+                                             MODEL_EVAL_ARTIFACT_FILE_NAME)
+        
         change_threshold = training_pipeline.MODEL_EVALUATION_CHANGED_THRESHOLD_SCORE
 
+
+
+@dataclass
+class ModelPusherConfig:
+        model_evaluation_dir: str = os.path.join(training_pipeline_config.artifact_dir, 
+                                                 training_pipeline.MODEL_PUSHER_DIR_NAME)
+        model_file_path = os.path.join( model_evaluation_dir,
+                                       training_pipeline.MODEL_FILE_NAME)
+        timestamp = round(datetime.now().timestamp())
+        saved_model_path=os.path.join(model_evaluation_dir,
+        training_pipeline.SAVED_MODEL_DIR,
+        f"{timestamp}",
+        training_pipeline.MODEL_FILE_NAME)

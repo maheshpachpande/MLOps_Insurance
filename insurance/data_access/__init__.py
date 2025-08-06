@@ -24,7 +24,7 @@ class InsuranceData:
         try:
             self.mongo_client = MongoDBClient(database_name=DATABASE_NAME)
         except Exception as e:
-            raise CustomException(e)
+            raise CustomException(e, sys)
 
     def save_csv_file(self, file_path: str, collection_name: str, database_name: Optional[str] = None) -> int:
         """
@@ -51,7 +51,7 @@ class InsuranceData:
             return len(records)
 
         except Exception as e:
-            raise CustomException(e)
+            raise CustomException(e,sys)
 
     def export_collection_as_dataframe(self, collection_name: str, database_name: Optional[str] = None) -> pd.DataFrame:
         """
@@ -77,7 +77,7 @@ class InsuranceData:
             return df
 
         except Exception as e:
-            raise CustomException(e)
+            raise CustomException(e,sys)
 
 
 # Run this as a script
@@ -86,5 +86,5 @@ if __name__ == "__main__":
         visa = InsuranceData()
         df = visa.export_collection_as_dataframe(database_name=DATABASE_NAME, collection_name=COLLECTION_NAME)
         print(df.head())  # Preview data
-    except Exception as err:
-        print(err)
+    except Exception as e:
+        raise CustomException(e,sys)

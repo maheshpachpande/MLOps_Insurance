@@ -1,7 +1,7 @@
 from insurance.entity.artifact_entity import ClassificationMetricArtifact
 from insurance.exception import CustomException
 from sklearn.metrics import f1_score,precision_score,recall_score
-
+import sys
 
 
 def get_classification_score(y_true,y_pred)->ClassificationMetricArtifact:
@@ -15,4 +15,4 @@ def get_classification_score(y_true,y_pred)->ClassificationMetricArtifact:
                     recall_score=float(model_recall_score))
         return classsification_metric
     except Exception as e:
-        raise CustomException(e)
+        raise CustomException(e, sys)

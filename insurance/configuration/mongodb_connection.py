@@ -2,9 +2,9 @@ import pymongo
 from insurance.constants.database_variables import DATABASE_NAME
 from insurance.constants.env_variable import MONGODB_URL_KEY
 from insurance.logger import logging
-
+from insurance.exception import CustomException
 import certifi
-import os
+import os, sys
 ca = certifi.where()
 
 class MongoDBClient:
@@ -24,7 +24,7 @@ class MongoDBClient:
             logging.info(f"MongoDB Client created for database: {database_name}")
             
         except Exception as e:
-            raise e
+            raise CustomException(e,sys)
 
 
 # if __name__ == "__main__":

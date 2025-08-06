@@ -1,4 +1,4 @@
-import os
+import os, sys
 import numpy as np
 from typing import Dict, Any
 from xgboost import XGBClassifier
@@ -36,7 +36,7 @@ class ModelTrainer:
             self.model_trainer_config = model_trainer_config
             self.data_transformation_artifact = data_transformation_artifact
         except Exception as e:
-            raise CustomException(e)
+            raise CustomException(e, sys)
 
     def perform_hyperparameter_tuning(
         self, x_train: np.ndarray, y_train: np.ndarray) -> ClassifierMixin:
@@ -92,7 +92,7 @@ class ModelTrainer:
                     best_params = grid_search.best_params_
 
             if best_model is None:
-                raise CustomException("No best model found during hyperparameter tuning.")
+                raise CustomException("No best model found during hyperparameter tuning.", sys)
 
             logging.info(f"✅ Best model selected: {best_model_name}")
             logging.info(f"✅ Best hyperparameters: {best_params}")
@@ -100,14 +100,14 @@ class ModelTrainer:
             return best_model
 
         except Exception as e:
-            raise CustomException(e)
+            raise CustomException(e, sys)
 
 
     def train_model(self, x_train: np.ndarray, y_train: np.ndarray) -> ClassifierMixin:
         try:
             return self.perform_hyperparameter_tuning(x_train, y_train)
         except Exception as e:
-            raise CustomException(e)
+            raise CustomException(e, sys)
 
     def initiate_model_trainer(self) -> ModelTrainerArtifact:
         try:
@@ -135,14 +135,14 @@ class ModelTrainer:
             classification_train_metric = get_classification_score(y_true=y_train, y_pred=y_train_pred)
 
             if classification_train_metric.f1_score < self.model_trainer_config.expected_accuracy:
-                raise CustomException("Trained model did not meet expected F1 threshold.")
+                raise CustomException("Trained model did not meet expected F1 threshold.", sys)
 
             y_test_pred = model.predict(x_test)
             classification_test_metric = get_classification_score(y_true=y_test, y_pred=y_test_pred)
 
             overfit_gap = abs(classification_train_metric.f1_score - classification_test_metric.f1_score)
             if overfit_gap > self.model_trainer_config.overfitting_underfitting_threshold:
-                raise CustomException(f"Model overfitting detected. Gap: {overfit_gap}")
+                raise CustomException(f"Model overfitting detected. Gap: {overfit_gap}", sys)
 
             preprocessor = load_object(file_path=self.data_transformation_artifact.transformed_object_file_path)
             insurance_model = InsuranceModel(preprocessor=preprocessor, model=model)
@@ -164,7 +164,7 @@ class ModelTrainer:
             return model_trainer_artifact
 
         except Exception as e:
-            raise CustomException(e)
+            raise CustomException(e, sys)
 
 
 if __name__ == "__main__":
@@ -183,4 +183,4 @@ if __name__ == "__main__":
         )
         trainer.initiate_model_trainer()
     except Exception as e:
-        raise CustomException(e)
+        raise CustomException(e, sys)

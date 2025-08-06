@@ -7,6 +7,8 @@ from insurance.entity.config_entity import (
     ModelEvaluationConfig
 )
 
+
+import sys
 from insurance.entity.artifact_entity import (
     DataIngestionArtifact,
     DataValidationArtifact,
@@ -41,7 +43,7 @@ class TrainingPipeline:
 
         except Exception as e:
             logging.error("❌ Error during data ingestion.", exc_info=True)
-            raise CustomException(e)
+            raise CustomException(e, sys)
 
     def start_data_validation(self, data_ingestion_artifact: DataIngestionArtifact) -> DataValidationArtifact:
         try:
@@ -57,7 +59,7 @@ class TrainingPipeline:
 
         except Exception as e:
             logging.error("❌ Error during data validation.", exc_info=True)
-            raise CustomException(e)
+            raise CustomException(e, sys)
 
     def start_data_transformation(self, data_validation_artifact: DataValidationArtifact) -> DataTransformationArtifact:
         try:
@@ -73,7 +75,7 @@ class TrainingPipeline:
 
         except Exception as e:
             logging.error("❌ Error during data transformation.", exc_info=True)
-            raise CustomException(e)
+            raise CustomException(e, sys)
 
     def start_model_trainer(self, data_transformation_artifact: DataTransformationArtifact) -> ModelTrainerArtifact:
         try:
@@ -89,7 +91,7 @@ class TrainingPipeline:
 
         except Exception as e:
             logging.error("❌ Error during model training.", exc_info=True)
-            raise CustomException(e)
+            raise CustomException(e, sys)
 
 
     
@@ -102,7 +104,7 @@ class TrainingPipeline:
             model_eval_artifact = model_eval.initiate_model_evaluation()
             return model_eval_artifact
         except  Exception as e:
-            raise  CustomException(e)
+            raise  CustomException(e, sys)
     
     
     def run_pipeline(self):
@@ -122,7 +124,7 @@ class TrainingPipeline:
 
         except Exception as e:
             logging.error("❌ Pipeline execution failed.", exc_info=True)
-            raise CustomException(e)
+            raise CustomException(e, sys)
 
 
 # 🚦 Entry point

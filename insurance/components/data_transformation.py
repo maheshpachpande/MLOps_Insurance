@@ -8,7 +8,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
 from sklearn.base import BaseEstimator, TransformerMixin
 
-from insurance.constants.training_pipeline import TARGET_COLUMN
+from insurance.constants.training_pipeline import TARGET_COLUMN, DATA_VALIDATION_VALIDATED_PATH
 
 from insurance.entity.config_entity import DataValidationConfig
 from insurance.entity.artifact_entity import DataTransformationArtifact, DataValidationArtifact
@@ -87,14 +87,14 @@ class DataTransformation:
             self.data_validation_artifact = data_validation_artifact
             self.data_transformation_config = data_transformation_config
         except Exception as e:
-            raise CustomException(e)
+            raise CustomException(e, sys)
 
     @staticmethod
     def read_data(file_path) -> pd.DataFrame:
         try:
             return pd.read_csv(file_path)
         except Exception as e:
-            raise CustomException(e)
+            raise CustomException(e, sys)
 
     @classmethod
     def get_data_transformer_object(cls, df: pd.DataFrame) -> Pipeline:
@@ -148,7 +148,7 @@ class DataTransformation:
             return full_pipeline
 
         except Exception as e:
-            raise CustomException(e)
+            raise CustomException(e, sys)
 
     def initiate_data_transformation(self) -> DataTransformationArtifact:
         try:
@@ -202,7 +202,7 @@ class DataTransformation:
             )
 
         except Exception as e:
-            raise CustomException(e)
+            raise CustomException(e, sys)
 
 
 

@@ -3,7 +3,7 @@ from insurance.logger import logging
 from insurance.entity.config_entity import DataIngestionConfig
 from insurance.entity.artifact_entity import DataIngestionArtifact
 from sklearn.model_selection import train_test_split
-import os  
+import os, sys
 from pandas import DataFrame
 from insurance.data_access import InsuranceData
 from insurance.utils.main_utils import read_yaml_file
@@ -20,7 +20,7 @@ class DataIngestion:
             self.data_ingestion_config=data_ingestion_config
             self._schema_config = read_yaml_file(SCHEMA_FILE_PATH)
         except Exception as e:
-            raise CustomException(e)
+            raise CustomException(e, sys)
 
     def export_data_into_feature_store(self) -> DataFrame:
         """
@@ -38,7 +38,7 @@ class DataIngestion:
             dataframe.to_csv(feature_store_file_path,index=False,header=True)
             return dataframe
         except  Exception as e:
-            raise  CustomException(e  )
+            raise  CustomException(e, sys)
 
     def split_data_as_train_test(self, dataframe: DataFrame) -> None:
         """
@@ -75,7 +75,7 @@ class DataIngestion:
 
             logging.info(f"Exported train and test file path.")
         except Exception as e:
-            raise CustomException(e)
+            raise CustomException(e, sys)
     
 
     def initiate_data_ingestion(self) -> DataIngestionArtifact:
@@ -88,7 +88,7 @@ class DataIngestion:
             
             return data_ingestion_artifact
         except Exception as e:
-            raise CustomException(e)
+            raise CustomException(e, sys)
         
         
         

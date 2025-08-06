@@ -1,93 +1,109 @@
 age:
-  drift_status: false
-  p_value: 0.939298150626693
+  drift_status: &id001 !!python/object/apply:numpy._core.multiarray.scalar
+  - !!python/object/apply:numpy.dtype
+    args:
+    - b1
+    - false
+    - true
+    state: !!python/tuple
+    - 3
+    - '|'
+    - null
+    - null
+    - null
+    - -1
+    - -1
+    - 0
+  - !!binary |
+    AA==
+  p_value: 0.1266555556634004
 authorities_contacted:
-  drift_status: false
-  p_value: 0.9705463707107949
+  drift_status: *id001
+  p_value: 0.9999999999994331
 auto_make:
-  drift_status: false
-  p_value: 0.7829141915645983
+  drift_status: *id001
+  p_value: 0.6815934044551095
 auto_year:
-  drift_status: false
-  p_value: 0.9160826991755253
+  drift_status: *id001
+  p_value: 0.6200208789083654
 bodily_injuries:
-  drift_status: false
-  p_value: 0.9998149276030658
+  drift_status: *id001
+  p_value: 0.989307418543381
 capital-gains:
-  drift_status: true
-  p_value: 0.04444726415006211
+  drift_status: *id001
+  p_value: 0.8995920411828514
 capital-loss:
-  drift_status: false
-  p_value: 0.9675877558447975
+  drift_status: *id001
+  p_value: 0.919512443836103
 collision_type:
-  drift_status: false
-  p_value: 0.9999581054379987
+  drift_status: *id001
+  p_value: 0.989307418543381
 incident_hour_of_the_day:
-  drift_status: false
-  p_value: 0.9972596935854263
+  drift_status: *id001
+  p_value: 0.41785247142416254
 incident_severity:
-  drift_status: false
-  p_value: 0.9633858233186512
+  drift_status: *id001
+  p_value: 0.32110503288230974
 incident_state:
-  drift_status: false
-  p_value: 0.6122759744219011
+  drift_status: *id001
+  p_value: 0.44449334942699326
 incident_type:
-  drift_status: false
-  p_value: 0.9999996962814652
+  drift_status: *id001
+  p_value: 0.9370961327604651
 injury_claim:
-  drift_status: false
-  p_value: 0.5858759606590891
+  drift_status: *id001
+  p_value: 0.36745220110722016
 insured_education_level:
-  drift_status: false
-  p_value: 0.957769298233464
+  drift_status: *id001
+  p_value: 0.9981654157284734
 insured_hobbies:
-  drift_status: false
-  p_value: 0.6907923793453117
+  drift_status: *id001
+  p_value: 0.20682023933636834
 insured_occupation:
-  drift_status: false
-  p_value: 0.7357537064015242
+  drift_status: *id001
+  p_value: 0.8995920411828514
 insured_relationship:
-  drift_status: false
-  p_value: 0.9951916356548752
+  drift_status: *id001
+  p_value: 0.9999988382921076
 insured_sex:
-  drift_status: false
-  p_value: 0.9628965701848762
+  drift_status: *id001
+  p_value: 0.9999988382921076
 months_as_customer:
-  drift_status: false
-  p_value: 0.9919286946819228
+  drift_status: *id001
+  p_value: 0.1266555556634004
 number_of_vehicles_involved:
-  drift_status: false
-  p_value: 0.9999999999999718
+  drift_status: *id001
+  p_value: 0.9999988382921076
 police_report_available:
-  drift_status: false
+  drift_status: *id001
   p_value: 1.0
 policy_annual_premium:
-  drift_status: false
-  p_value: 0.44967016034732216
+  drift_status: *id001
+  p_value: 0.5591996234401292
 policy_csl:
-  drift_status: false
-  p_value: 0.9999999957938296
+  drift_status: *id001
+  p_value: 0.9999999997714684
 policy_deductable:
-  drift_status: false
-  p_value: 1.0
+  drift_status: *id001
+  p_value: 0.8275938817806103
 policy_state:
-  drift_status: false
-  p_value: 0.7221297098807012
+  drift_status: *id001
+  p_value: 0.5294757647328986
 property_claim:
-  drift_status: false
-  p_value: 0.5746510715804812
+  drift_status: *id001
+  p_value: 0.650805135502965
 property_damage:
-  drift_status: false
-  p_value: 0.3267011422872141
+  drift_status: *id001
+  p_value: 0.8774908902153534
 total_claim_amount:
-  drift_status: false
-  p_value: 0.4770190630217189
+  drift_status: *id001
+  p_value: 0.3437618208353567
 umbrella_limit:
-  drift_status: false
-  p_value: 0.8196463138691285
+  drift_status: *id001
+  p_value: 0.8995920411828514
 vehicle_claim:
-  drift_status: false
-  p_value: 0.9128933330950199
+  drift_status: *id001
+  p_value: 0.7717794020650939
 witnesses:
-  drift_status: false
-  p_value: 0.9999946945807144
+  drift_status: *id001
+  p_value: 0.6200208789083654
